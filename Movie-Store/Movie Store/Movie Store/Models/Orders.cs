@@ -10,6 +10,6 @@ namespace Movie_Store.Models
         public DateTime OrderDate { get; set; } = DateTime.Now;
 
         public int CustomerId { get; set; }
-        public virtual Customer Customer { get; set; }
+        //public virtual Customer Customer { get; set; }
     }
 }
