@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HIqtsf/kW4iY9pEzGjgKBKajNw2aNaxO7+uECH048NLpF6h5E1fyomGjWN20AsLcyGKMdDPmJVCNsREAKNvkYg==",
+  "dgSpecHash": "4yjj7RoOey20d4fxWHqYjwW1yIuCQYjRG6lc7QjKlH5uTnVjMf/MYzMPPoY8ljyjdy64gQThAhaEaVHuhbjGeQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Student\\Source\\Repos\\MovieStore454\\Movie-Store\\Movie Store\\Movie Store\\Movie Store.csproj",
+  "projectFilePath": "C:\\Users\\Student\\Source\\Repos\\MovieStore\\Movie-Store\\Movie Store\\Movie Store\\Movie Store.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Student\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Student\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
