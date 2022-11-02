@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-Movie_Store-4AFA9531-E4B5-4093-99BA-22B3AA0E43EB</UserSecretsId>
     <RootNamespace>Movie_Store</RootNamespace>

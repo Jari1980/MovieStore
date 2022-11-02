@@ -15,14 +15,20 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
+
+    CustomersSeed.Initialize(services);
+
     SeedMovieData.Initialize(services); 
-    //John Lägg till din SeedCustomers här
+    
+
 }
 
 // Configure the HTTP request pipeline.
