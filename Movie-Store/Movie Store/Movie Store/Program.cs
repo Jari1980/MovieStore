@@ -23,7 +23,12 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
 
+
     CustomersSeed.Initialize(services);
+
+    SeedMovieData.Initialize(services); 
+    
+
 }
 
 // Configure the HTTP request pipeline.
