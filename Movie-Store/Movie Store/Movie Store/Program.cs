@@ -26,7 +26,10 @@ using (var scope = app.Services.CreateScope())
 
     CustomersSeed.Initialize(services);
 
-    SeedMovieData.Initialize(services); 
+    SeedMovieData.Initialize(services);
+
+    SeedOrders.Initialize(services);
+
     
 
 }
