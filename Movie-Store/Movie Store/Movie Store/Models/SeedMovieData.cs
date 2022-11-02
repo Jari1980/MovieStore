@@ -13,7 +13,7 @@ namespace Movie_Store.Models
             using (var context = new ApplicationDbContext(
                 serviceProvider.GetRequiredService<
                     DbContextOptions<ApplicationDbContext>>()))
-            //DefaultConnection
+            
             {
                 if (context.Movies.Any())
                 {
