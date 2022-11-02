@@ -10239,11 +10239,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Student\\OneDrive\\MovieStore 1\\Movie-Store\\Movie Store\\Movie Store\\Movie Store.csproj",
+      "projectUniqueName": "C:\\Users\\Student\\OneDrive\\MovieStore OneDrive\\Movie-Store\\Movie Store\\Movie Store\\Movie Store.csproj",
       "projectName": "Movie Store",
-      "projectPath": "C:\\Users\\Student\\OneDrive\\MovieStore 1\\Movie-Store\\Movie Store\\Movie Store\\Movie Store.csproj",
+      "projectPath": "C:\\Users\\Student\\OneDrive\\MovieStore OneDrive\\Movie-Store\\Movie Store\\Movie Store\\Movie Store.csproj",
       "packagesPath": "C:\\Users\\Student\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Student\\OneDrive\\MovieStore 1\\Movie-Store\\Movie Store\\Movie Store\\obj\\",
+      "outputPath": "C:\\Users\\Student\\OneDrive\\MovieStore OneDrive\\Movie-Store\\Movie Store\\Movie Store\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
