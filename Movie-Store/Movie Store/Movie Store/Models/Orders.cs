@@ -11,6 +11,7 @@ namespace Movie_Store.Models
 
         
         public int CustomerId { get; set; }
-        //public virtual Customer Customer { get; set; }
+        
+        public virtual Customers Customer { get; set; }
     }
 }
