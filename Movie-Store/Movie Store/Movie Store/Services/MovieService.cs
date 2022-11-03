@@ -4,11 +4,11 @@ using Movie_Store.Data;
 
 namespace Movie_Store.Services
 {
-    public class AddMovieService : IAddMovieService
+    public class MovieService : IMovieService
     {
         private readonly ApplicationDbContext _movie;
 
-        public AddMovieService(ApplicationDbContext movie)
+        public MovieService(ApplicationDbContext movie)
         {
             _movie = movie;
         }
@@ -21,8 +21,18 @@ namespace Movie_Store.Services
 
         }
 
-        public void DeleteMovie()
+        public Movies GetMovies(int? Id)
         {
+            var movieId = _movie.Movies.Find(Id);
+
+            return (movieId);
+        }
+
+        public Movies DeleteMovie(Movies deleteMovie)
+        {
+            _movie.Movies.Remove(deleteMovie);
+            _movie.SaveChanges();
+            return (deleteMovie);
 
         }
 
