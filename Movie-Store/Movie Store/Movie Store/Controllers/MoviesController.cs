@@ -13,16 +13,16 @@ namespace Movie_Store.Controllers
 {
     public class MoviesController : Controller
     {
-        private readonly IAddMovieService _addMovieService;
+        private readonly IMovieService _MovieService;
 
-        public MoviesController(IAddMovieService addMovieService)
+        public MoviesController(IMovieService MovieService)
         {
-            _addMovieService = addMovieService;
+            _MovieService = MovieService;
         }
 
         public IActionResult Index()
         {
-            var movies = _addMovieService.GetAllMovies();
+            var movies = _MovieService.GetAllMovies();
             return View(movies);
         }
 
@@ -38,11 +38,64 @@ namespace Movie_Store.Controllers
         {
             if (ModelState.IsValid)
             {
-                _addMovieService.AddMovie(movies);
+               
+                _MovieService.AddMovie(movies);
                 return RedirectToAction(nameof(Index));
             }
             return View(movies);
         }
+
+        public IActionResult Delete(int? Id)
+        {
+            var movies = _MovieService.GetMovies(Id);
+            return View(movies);
+        }
+        [HttpPost, ActionName("Delete")]
+        public IActionResult Delete(Movies movies)
+        {
+            _MovieService.DeleteMovie(movies);
+
+            //var movies = _MovieService.GetMovies;
+                //.FirstOrDefaultAsync(m => m.Id == Id);
+            //if (movies == null)
+            //{
+            //    return NotFound();
+            //}
+
+            return View(movies);
+        }
+
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult DeleteConfirmed(int id)
+        //{
+        //    if (_MovieService.Movies == null)
+        //    {
+        //        return Problem("Entity set 'ApplicationDbContext.Movies'  is null.");
+        //    }
+        //    var movies = await _MovieService.Movies.FindAsync(id);
+        //    if (movies != null)
+        //    {
+        //        _MovieService.Movies.Remove(movies);
+        //    }
+
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
+
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Delete([Bind("Id,Title,Director,ReleaseYear,Price")] Movies movies)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+
+        //        _MovieService.DeleteMovie(movies);
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(movies);
+        //}
     }
 }
 

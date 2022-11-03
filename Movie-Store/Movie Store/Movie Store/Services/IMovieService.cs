@@ -2,10 +2,11 @@
 
 namespace Movie_Store.Services
 {
-    public interface IAddMovieService
+    public interface IMovieService
     {
         Movies AddMovie(Movies addMovie);
-        void DeleteMovie();
+        Movies GetMovies(int? Id);
+        Movies DeleteMovie(Movies deleteMovies);
         IEnumerable<Movies> GetAllMovies();
     }
 }
