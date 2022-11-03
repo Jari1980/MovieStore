@@ -31,7 +31,7 @@ using (var scope = app.Services.CreateScope())
 
     SeedOrders.Initialize(services);
 
-    
+    SeedOrderRows.Initialize(services);
 
 }
 
