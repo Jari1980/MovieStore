@@ -8,12 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using Movie_Store.Data;
 using Movie_Store.Models;
 using Movie_Store.Services;
+using Movie_Store.Helper;
+using Movie_Store.Models.ViewModells;
 
 namespace Movie_Store.Controllers
 {
     public class MoviesController : Controller
     {
         private readonly IMovieService _MovieService;
+
+        const string SessionKeyCart = "ShoppingCart";
 
         public MoviesController(IMovieService MovieService)
         {
@@ -55,15 +59,42 @@ namespace Movie_Store.Controllers
         {
             _MovieService.DeleteMovie(movies);
 
-            //var movies = _MovieService.GetMovies;
-                //.FirstOrDefaultAsync(m => m.Id == Id);
-            //if (movies == null)
-            //{
-            //    return NotFound();
-            //}
-
             return View(movies);
         }
+
+        public IActionResult ShoppingView()
+        {
+            var shoppingList = _MovieService.GetAllMovies();
+            return View(shoppingList);
+        }
+
+        public IActionResult AddToCart(int Id)
+        {
+            if (HttpContext.Session.Get<CartVM>(SessionKeyCart) == default)
+            {
+                HttpContext.Session.Set<CartVM>(SessionKeyCart, new CartVM());
+            }
+            CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+            sessionObject.MovieIds.Add(Id);
+            HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
+            return RedirectToAction("ShoppingView");
+        }
+
+        public IActionResult RemoveFromCart(int Id)
+        {
+            CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+            sessionObject.MovieIds.Remove(Id);
+            HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
+            return RedirectToAction("ShoppingView");
+        }
+
+        //public IActionResult ShowCart()
+        //{
+        //    var Cart = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+
+        //    return View(Cart);
+        //}
+
 
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
