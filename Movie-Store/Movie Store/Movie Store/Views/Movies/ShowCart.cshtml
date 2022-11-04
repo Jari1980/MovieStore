@@ -1,6 +1,7 @@
-﻿@*@model IEnumerable<Cart>
+﻿@model Movie_Store.Models.ViewModells.CartVM
 
-@foreach(var item in Model){
-    <p>@item.Name</p>
-    <p>@item.Price</p>
-}*@
+
+@foreach(var item in @Model.MovieIds){
+    <p>@item.ToString()</p>
+   // <p>@item.Price</p>
+}

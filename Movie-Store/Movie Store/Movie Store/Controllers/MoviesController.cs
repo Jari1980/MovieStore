@@ -88,12 +88,12 @@ namespace Movie_Store.Controllers
             return RedirectToAction("ShoppingView");
         }
 
-        //public IActionResult ShowCart()
-        //{
-        //    var Cart = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+        public IActionResult ShowCart()
+        {
+            var Cart = HttpContext.Session.Get<CartVM>(SessionKeyCart);
 
-        //    return View(Cart);
-        //}
+            return View(Cart);
+        }
 
 
         //[HttpPost, ActionName("Delete")]
