@@ -16,12 +16,14 @@ namespace Movie_Store.Controllers
     public class MoviesController : Controller
     {
         private readonly IMovieService _MovieService;
+        private readonly ApplicationDbContext _db;
 
         const string SessionKeyCart = "ShoppingCart";
 
-        public MoviesController(IMovieService MovieService)
+        public MoviesController(IMovieService MovieService, ApplicationDbContext db)
         {
             _MovieService = MovieService;
+            _db = db;
         }
 
         public IActionResult Index()
@@ -90,9 +92,34 @@ namespace Movie_Store.Controllers
 
         public IActionResult ShowCart()
         {
-            var Cart = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+            CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
 
-            return View(Cart);
+            if (sessionObject == null)
+            {
+                return View();
+            }
+
+            var SCart = (from m in _db.Movies.ToList()
+                         join s in sessionObject.MovieIds
+                         on m.Id equals s
+                         select new ShoppingVM()
+                         {
+                             Title = m.Title,
+                             Price = m.Price,
+                         });
+
+            //var SCart = _db.Movies.OrderBy(x => x.Id).ToList()
+            //    .Join(sessionObject, c => c.Id, )
+            //    .Select(c => new ShoppingVM()
+            //    {
+            //        Title = c.Title,
+            //        Price = c.Price,
+
+            //    });
+
+            //var Cart = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+
+            return View(SCart);
         }
 
 
