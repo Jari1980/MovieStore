@@ -99,7 +99,7 @@ namespace Movie_Store.Controllers
                 return View();
             }
 
-            var SCart = (from m in _db.Movies.ToList()
+            var SCart = (from m in _db.Movies.ToList().OrderBy(x => x.Title)
                          join s in sessionObject.MovieIds
                          on m.Id equals s
                          select new ShoppingVM()
