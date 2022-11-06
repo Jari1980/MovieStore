@@ -2,20 +2,44 @@
 
 
 @{
-    int i = 0;
-    int copies = 1;
-    List<string> shopList = new List<string>();
-    @foreach (var item in Model)
+    if (Model != null && Model.GetEnumerator().MoveNext())
     {
-        shopList.Add(@item.Title);
-    }
-    @for (int j = 0; j < shopList.Count; j++)
-    {
-        if (j == 0)
+        int i = 0;
+        int copies = 1;
+        List<string> shopList = new List<string>();
+        @foreach (var item in Model)
         {
-            if (shopList.Count > 1)
+            shopList.Add(@item.Title);
+        }
+
+
+        @for (int j = 0; j < shopList.Count; j++)
+        {
+            if (j == 0)
             {
-                if (shopList[i] == shopList[i + 1])
+                if (shopList.Count > 1)
+                {
+                    if (shopList[i] == shopList[i + 1])
+                    {
+                        copies++;
+                    }
+                    else
+                    {
+                        <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price*@copies)</span>
+                        <br />
+                        copies = 1;
+                    }
+                }
+                else
+                {
+                    <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price*@copies)</span>
+                    <br />
+                    copies = 1;
+                }
+            }
+            else if (j < shopList.Count - 1)
+            {
+                if (shopList[j] == shopList[j + 1])
                 {
                     copies++;
                 }
@@ -26,6 +50,12 @@
                     copies = 1;
                 }
             }
+            else if (j == shopList.Count - 1)
+            {
+                <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price*@copies)</span>
+                <br />
+                copies = 1;
+            }
             else
             {
                 <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price*@copies)</span>
@@ -33,43 +63,18 @@
                 copies = 1;
             }
         }
-        else if(j < shopList.Count - 1)
-        {
-            if (shopList[j] == shopList[j + 1])
-            {
-                copies++;
-            }
-            else
-            {
-                <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price*@copies)</span>
-                <br />
-                copies = 1;
-            }
-        }
-        else if(j == shopList.Count - 1)
-            {
-            <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price*@copies)</span>
-            <br />
-            copies = 1;
-            }
-        else
-            {
-            <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price*@copies)</span>
-            <br />
-            copies = 1;
-            }
-    }
-}
 
-    @{
         double res = 0;
-    @foreach (var item in Model)
-    {
-        res = @item.Price + res;
+        @foreach (var item in Model)
+        {
+            res = @item.Price + res;
+        }
+
+        <br />
+        <span>Total sum for shopping cart: @res</span>
     }
 }
-<br />
-<span>Total sum for shopping cart: @res</span>
+ 
 
 
 
