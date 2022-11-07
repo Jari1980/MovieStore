@@ -123,6 +123,39 @@ namespace Movie_Store.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult submitOrder(string firstName, string lastName, string billingAdress, string billingzip,
+            string deliveryAdress, string deliveryZip, string email, string phoneNumber)
+        {
+            //public void Initialize(IServiceProvider serviceProvider)
+            //{
+
+            //    using (var context = new ApplicationDbContext(
+            //    serviceProvider.GetRequiredService<
+            //        DbContextOptions<ApplicationDbContext>>()))
+            //    {
+
+            string FN = firstName;
+            _db.Customers.AddRange(
+            new Customers
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                BillingAdress = billingAdress,
+                BillingZip = billingzip,
+                DeliveryAddress = deliveryAdress,
+                DeliveryZip = deliveryZip,
+                EmailAdress = email,
+                PhoneNo = phoneNumber
+            }
+            );
+            _db.SaveChanges();
+            //   }
+
+            // }
+            return View("ShowCart");
+        }
+
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
         //public IActionResult DeleteConfirmed(int id)
