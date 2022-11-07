@@ -127,15 +127,21 @@ namespace Movie_Store.Controllers
         public IActionResult submitOrder(string firstName, string lastName, string billingAdress, string billingzip,
             string deliveryAdress, string deliveryZip, string email, string phoneNumber)
         {
-            //public void Initialize(IServiceProvider serviceProvider)
-            //{
 
-            //    using (var context = new ApplicationDbContext(
-            //    serviceProvider.GetRequiredService<
-            //        DbContextOptions<ApplicationDbContext>>()))
-            //    {
+            CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
 
-            string FN = firstName;
+            Customers cust = new Customers()
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                BillingAdress = billingAdress,
+                BillingZip = billingzip,
+                DeliveryAddress = deliveryAdress,
+                DeliveryZip = deliveryZip,
+                EmailAdress = email,
+                PhoneNo = phoneNumber
+            };
+
             _db.Customers.AddRange(
             new Customers
             {
@@ -150,6 +156,38 @@ namespace Movie_Store.Controllers
             }
             );
             _db.SaveChanges();
+
+            Orders ord = new Orders()
+            {
+                OrderDate = DateTime.Now,
+                CustomerId = cust.Id,
+                Customer = cust,
+            };
+
+            _db.Orders.AddRange(
+                new Orders
+                {
+                    OrderDate = DateTime.Now,
+                    CustomerId = cust.Id,
+                    Customer = cust,
+                }
+                );
+            _db.SaveChanges();
+
+            int counter = sessionObject.MovieIds.Count();
+
+            for (int i = 0; i < counter; i++) {
+
+                _db.OrderRows.AddRange(
+                    new OrderRows
+                    {
+                        OrderId = _db.Orders.Max(o => o.Id),
+                        MovieId = sessionObject.MovieIds[i],
+                        Price = (_db.Movies.FirstOrDefault(m => m.Id == sessionObject.MovieIds[i])).Price
+                    }
+                    );
+                _db.SaveChanges();
+            }
             //   }
 
             // }
