@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Movie_Store.Models.ViewModells.ShoppingVM>
 
-
+<h2>Shopping cart</h2>
 @{
     if (Model != null)
     {
@@ -72,10 +72,53 @@
 
         <br />
         <span>Total sum for shopping cart: @res</span>
+        <br />
     }
 }
- 
 
+<br />
+<form>
+    <h3>Please fill in personal data in order to complete purchase</h3>
+  <div class="mb-3">
+    <label for="firstName" class="form-label">First name</label>
+    <input type="text" class="form-control" id="firstName">
+  </div>
+  <div class="mb-3">
+    <label for="lastName" class="form-label">Last name</label>
+    <input type="text" class="form-control" id="lastName">
+  </div>
+  <div class="mb-3">
+    <label for="billingAdress" class="form-label">Billing Adress</label>
+    <input type="text" class="form-control" id="billingAdress">
+  </div>
+  <div class="mb-3">
+    <label for="billingZip" class="form-label">Billing Zip</label>
+    <input type="text" class="form-control" id="billingZip">
+  </div>
+  <div class="mb-3">
+    <label for="deliveryAdress" class="form-label">Delivery Adress</label>
+    <input type="text" class="form-control" id="deliveryAdress">
+  </div>
+  <div class="mb-3">
+    <label for="deliveryZip" class="form-label">Delivery Zip</label>
+    <input type="text" class="form-control" id="deliveryZip">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="phoneNumber" class="form-label">Phone Number</label>
+    <input type="tel" class="form-control" id="phoneNumber" aria-describedby="phoneHelp">
+    <div id="phoneHelp" class="form-text">Phone number is optional.</div>
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="confirmPurchase">
+    <label class="form-check-label" for="confirmPurchse">Confirm purchase</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
 
 @*string title = "";
