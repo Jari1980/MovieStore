@@ -67,7 +67,7 @@
         double res = 0;
         @foreach (var item in Model)
         {
-            res = @item.Price + res;
+            res = Math.Round((@item.Price + res), 2);
         }
 
         <br />
