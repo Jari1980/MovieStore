@@ -148,6 +148,7 @@ namespace Movie_Store.Controllers
 
             CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
 
+
             Customers cust = new Customers()
             {
                 FirstName = firstName,
@@ -175,6 +176,7 @@ namespace Movie_Store.Controllers
             );
            
 
+
             Orders ord = new Orders()
             {
                 OrderDate = DateTime.Now,
@@ -190,7 +192,7 @@ namespace Movie_Store.Controllers
                     Customer = cust,
                 }
                 );
-            
+
 
             int counter = sessionObject.MovieIds.Count();
             for (int i = 0; i < counter; i++) {
