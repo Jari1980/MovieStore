@@ -26,6 +26,12 @@
                     else
                     {
                         <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price*@copies)</span>
+                        <tr>
+                        <td>|
+                        <a asp-action="AddCopy" asp-route-Title="@Model.ElementAt(j).Title">Add movie to cart</a> |
+                        <a asp-action="RemoveCopy" asp-route-Title="@Model.ElementAt(j).Title">Remove movie from cart</a>
+                        </td>
+                        </tr>
                         <br />
                         copies = 1;
                     }
@@ -33,6 +39,12 @@
                 else
                 {
                     <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price*@copies)</span>
+                    <tr>
+                    <td>|
+                    <a asp-action="AddCopy" asp-route-Title="@Model.ElementAt(j).Title">Add movie to cart</a> |
+                    <a asp-action="RemoveCopy" asp-route-Title="@Model.ElementAt(j).Title">Remove movie from cart</a>
+                    </td>
+                    </tr>
                     <br />
                     copies = 1;
                 }
@@ -46,6 +58,12 @@
                 else
                 {
                     <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price*@copies)</span>
+                    <tr>
+                    <td>|
+                    <a asp-action="AddCopy" asp-route-Title="@Model.ElementAt(j).Title">Add movie to cart</a> |
+                    <a asp-action="RemoveCopy" asp-route-Title="@Model.ElementAt(j).Title">Remove movie from cart</a>
+                    </td>
+                    </tr>
                     <br />
                     copies = 1;
                 }
@@ -53,12 +71,24 @@
             else if (j == shopList.Count - 1)
             {
                 <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price*@copies)</span>
+                <tr>
+                <td>|
+                <a asp-action="AddCopy" asp-route-Title="@Model.ElementAt(j).Title">Add movie to cart</a> |
+                <a asp-action="RemoveCopy" asp-route-Title="@Model.ElementAt(j).Title">Remove movie from cart</a>
+                </td>
+                </tr>
                 <br />
                 copies = 1;
             }
             else
             {
                 <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price*@copies)</span>
+                <tr>
+                <td>|
+                <a asp-action="AddCopy" asp-route-Title="@Model.ElementAt(j).Title">Add movie to cart</a> |
+                <a asp-action="RemoveCopy" asp-route-Title="@Model.ElementAt(j).Title">Remove movie from cart</a>
+                </td>
+                </tr>
                 <br />
                 copies = 1;
             }

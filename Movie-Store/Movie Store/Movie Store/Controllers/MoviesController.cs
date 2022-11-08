@@ -90,6 +90,36 @@ namespace Movie_Store.Controllers
             return RedirectToAction("ShoppingView");
         }
 
+       // [HttpPost]
+        public IActionResult AddCopy(string Title)
+        {
+            //Title = Title.Trim();
+            var test = Title;
+
+            int Id = _db.Movies.Where(x => x.Title == Title).Select(x => x.Id).First();
+
+            CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+            sessionObject.MovieIds.Add(Id);
+            HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
+
+            return RedirectToAction("ShowCart");
+        }
+
+        // [HttpPost]
+        public IActionResult RemoveCopy(string Title)
+        {
+            var test = Title;
+
+            int Id = _db.Movies.Where(x => x.Title == Title).Select(x => x.Id).First();
+
+            CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+            sessionObject.MovieIds.Remove(Id);
+            HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
+
+            return RedirectToAction("ShowCart");
+        }
+
+
         public IActionResult ShowCart()
         {
             CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
@@ -106,13 +136,10 @@ namespace Movie_Store.Controllers
                          {
                              Title = m.Title,
                              Price = m.Price,
-                         });
-
-            
+                         });   
 
             return View(SCart);
         }
-
 
         [HttpPost]
         public IActionResult submitOrder(string firstName, string lastName, string billingAdress, string billingzip,
@@ -166,9 +193,7 @@ namespace Movie_Store.Controllers
             _db.SaveChanges();
 
             int counter = sessionObject.MovieIds.Count();
-
             for (int i = 0; i < counter; i++) {
-
                 _db.OrderRows.AddRange(
                     new OrderRows
                     {
@@ -179,11 +204,15 @@ namespace Movie_Store.Controllers
                     );
                 _db.SaveChanges();
             }
-           
+            int counter2 = sessionObject.MovieIds.Count();
+            for (int j = 0; j < counter2; j++)
+            {
+                sessionObject.MovieIds.RemoveAt(0);
+            }
+            HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
+
             return View("ShowCart");
         }
-
-
     }
 }
 
