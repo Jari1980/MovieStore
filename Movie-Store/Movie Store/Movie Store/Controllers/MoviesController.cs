@@ -161,6 +161,21 @@ namespace Movie_Store.Controllers
                 PhoneNo = phoneNumber
             };
 
+            _db.Customers.AddRange(
+            new Customers
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                BillingAdress = billingAdress,
+                BillingZip = billingzip,
+                DeliveryAddress = deliveryAdress,
+                DeliveryZip = deliveryZip,
+                EmailAdress = email,
+                PhoneNo = phoneNumber
+            }
+            );
+           
+
 
             Orders ord = new Orders()
             {
@@ -177,6 +192,7 @@ namespace Movie_Store.Controllers
                     Customer = cust,
                 }
                 );
+
 
             int counter = sessionObject.MovieIds.Count();
             for (int i = 0; i < counter; i++) {
@@ -197,7 +213,12 @@ namespace Movie_Store.Controllers
             }
             HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
 
-            return View("ShowCart");
+            return View("PurchaseDone");
+        }
+
+        public IActionResult PurchaseDone()
+        {
+            return View();
         }
     }
 }
