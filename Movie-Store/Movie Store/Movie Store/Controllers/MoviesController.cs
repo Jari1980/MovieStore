@@ -173,7 +173,7 @@ namespace Movie_Store.Controllers
                 PhoneNo = phoneNumber
             }
             );
-            _db.SaveChanges();
+           
 
             Orders ord = new Orders()
             {
@@ -190,7 +190,7 @@ namespace Movie_Store.Controllers
                     Customer = cust,
                 }
                 );
-            _db.SaveChanges();
+            
 
             int counter = sessionObject.MovieIds.Count();
             for (int i = 0; i < counter; i++) {
@@ -211,7 +211,12 @@ namespace Movie_Store.Controllers
             }
             HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
 
-            return View("ShowCart");
+            return View("PurchaseDone");
+        }
+
+        public IActionResult PurchaseDone()
+        {
+            return View();
         }
     }
 }
