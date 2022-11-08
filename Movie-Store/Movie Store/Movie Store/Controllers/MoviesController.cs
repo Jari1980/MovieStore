@@ -148,6 +148,7 @@ namespace Movie_Store.Controllers
 
             CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
 
+
             Customers cust = new Customers()
             {
                 FirstName = firstName,
@@ -160,20 +161,6 @@ namespace Movie_Store.Controllers
                 PhoneNo = phoneNumber
             };
 
-            _db.Customers.AddRange(
-            new Customers
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                BillingAdress = billingAdress,
-                BillingZip = billingzip,
-                DeliveryAddress = deliveryAdress,
-                DeliveryZip = deliveryZip,
-                EmailAdress = email,
-                PhoneNo = phoneNumber
-            }
-            );
-            _db.SaveChanges();
 
             Orders ord = new Orders()
             {
@@ -190,7 +177,6 @@ namespace Movie_Store.Controllers
                     Customer = cust,
                 }
                 );
-            _db.SaveChanges();
 
             int counter = sessionObject.MovieIds.Count();
             for (int i = 0; i < counter; i++) {
