@@ -1,0 +1,22 @@
+﻿@model Movie_Store.Models.Movies
+
+<div>
+    <hr />
+    <dl class="row">
+       
+        <dd class = "col-sm-12">
+            <b>@Html.DisplayFor(model => model.Title)</b>
+        </dd>
+       
+        <dd class = "col-sm-12">
+            @Html.DisplayFor(model => model.Director)
+        </dd>
+        <dd class = "col-sm-12">
+            @Html.DisplayFor(model => model.ReleaseYear)
+        </dd>
+        <dd class = "col-sm-12">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+</div>
+
