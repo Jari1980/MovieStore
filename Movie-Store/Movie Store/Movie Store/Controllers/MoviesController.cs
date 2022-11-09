@@ -19,6 +19,7 @@ namespace Movie_Store.Controllers
         private readonly ApplicationDbContext _db;
 
         const string SessionKeyCart = "ShoppingCart";
+        
 
         public MoviesController(IMovieService MovieService, ApplicationDbContext db)
         {
@@ -70,6 +71,17 @@ namespace Movie_Store.Controllers
             return View(shoppingList);
         }
 
+        public IActionResult Buy(int Id)
+        {
+            if (HttpContext.Session.Get<CartVM>(SessionKeyCart) == default)
+            {
+                HttpContext.Session.Set<CartVM>(SessionKeyCart, new CartVM());
+            }
+            CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+            sessionObject.MovieIds.Add(Id);
+            HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
+            return RedirectToAction("Shopping");
+        }
         public IActionResult AddToCart(int Id)
         {
             if (HttpContext.Session.Get<CartVM>(SessionKeyCart) == default)
@@ -117,6 +129,12 @@ namespace Movie_Store.Controllers
             HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
 
             return RedirectToAction("ShowCart");
+        }
+
+        public IActionResult Shopping()
+        {
+            var shoppingList = _MovieService.GetAllMovies();
+            return View(shoppingList);
         }
 
 
@@ -206,6 +224,7 @@ namespace Movie_Store.Controllers
                     );
                 _db.SaveChanges();
             }
+
             int counter2 = sessionObject.MovieIds.Count();
             for (int j = 0; j < counter2; j++)
             {

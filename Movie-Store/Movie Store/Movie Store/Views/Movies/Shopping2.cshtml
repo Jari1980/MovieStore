@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Movie_Store.Models.Movies>
+
+
+@{
+    ViewData["Title"] = "View";
+}
+<head>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*@await RenderSectionAsync("Scripts", required: false)*@
+</head>
+
+<body>
+    <div class="container">
+        @* <div class="row justify-content-center">*@
+        <div class="row justify-content-center">
+            
+            <div class="row-cols-4">
+                <tr>
+                @foreach (var item in @Model)
+                {
+                    <td>
+                    <div class="card" style="width: 12rem;">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            @* <p class="card-text">@Html.Partial("_moviePartial", item)</p>
+                        <a href="@Html.Partial("_moviePartial", item)" class="btn btn-primary">Purchase</a>*@
+                        </div>
+                    </div>
+                    </td>
+                }
+               </tr>
+            </div>
+        </div>
+    </div>
+</body>
