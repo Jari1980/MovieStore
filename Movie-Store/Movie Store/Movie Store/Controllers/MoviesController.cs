@@ -269,7 +269,7 @@ namespace Movie_Store.Controllers
             }
             HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
 
-            return View();
+            return RedirectToAction("Index", "Home");
         }
     
     }

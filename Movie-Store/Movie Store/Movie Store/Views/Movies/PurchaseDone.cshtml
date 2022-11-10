@@ -5,6 +5,15 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <style type="text/css">
+        table > tbody > tr > td, table > tbody > tr > th,
+        table > tfoot > tr > td, table > tfoot > tr > th {
+            border: 0
+        }
+    </style>
+
+
 </head>
 <br />
 <br />
@@ -24,7 +33,9 @@
 <br />
 
 <body>
-
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-4">
     <table class="table" border="0">
         <thead>
             <tr>
@@ -138,21 +149,33 @@
         </tbody>
     </table>
 
-    <a href="Final">
-    <input type="button" value="Click Me" />
-    </a>
-   @* <a asp-action="Final" asp-route-Final="Marcus">Final</a>*@
+            </div>
 
-    <div style="display:inline-flex;">
+            <div class="col-4">
+        <img src="https://ih1.redbubble.net/image.1302017755.2407/flat,750x,075,f-pad,750x1000,f8f8f8.jpg" width="200" height="200" />
+            </div>
+
+        </div>
+    </div>
+
+    <div style="display:inline-flex">
+    <a class="nav-link" asp-action="Final">Back to Home page</a>
+    </div>
+    
+   
+
+    @*<a href="Final">
+    <input type="button" value="Click Me" />
+    </a>*@
+   
+
+    @*<div style="display:inline-flex;">
         <ul class="list-group">
   <li class="list-group-item">
-            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">To Home Page</a>
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Back To Home Page</a>
   </li>
-  <li class="list-group-item">
-            <a class="nav-link" asp-area="" asp-controller="Movies" asp-action="ShoppingView">Go Back To Movies</a>
-  </li>
-</ul>
-    </div>
+  </ul>
+    </div>*@
 
 
 </body>
