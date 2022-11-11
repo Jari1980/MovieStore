@@ -68,4 +68,8 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
+//app.MapControllerRoute(
+//    name: "Extra",
+//    pattern: "{controller=Movies}/{action=CustomerData}/{Model.email}");
+
 app.Run();
