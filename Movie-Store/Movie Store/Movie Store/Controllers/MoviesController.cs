@@ -137,6 +137,43 @@ namespace Movie_Store.Controllers
             return View(shoppingList);
         }
 
+        public IActionResult Orders()
+        {
+            //return RedirectToRoute("CustomerData", "Hej");
+            return View();
+        }
+        //return RedirectToRoute("AlbumHome", new { albumName });
+
+
+       // [Route("/Movies/CustomerData", Name = "HAHAAAA")]
+        [HttpPost]
+        public IActionResult CustomerData(int Id)
+        {
+            string email = _db.Customers.Where(y => y.Id == Id).FirstOrDefault().EmailAdress;
+
+            var Orders = _db.Orders.Where(x => x.CustomerId == Id)
+                .Join(_db.OrderRows,
+                order => order.Id,
+                orderR => orderR.OrderId,
+                (order, orderR) => new {order, orderR})
+                .Join(_db.Movies,
+                ord => ord.orderR.MovieId, a => a.Id, (ord, a) => new {ord, a})
+                .Join(_db.Customers,
+                cust =>cust.ord.order.CustomerId, c => c.Id, (cust, c) => new {cust, c})
+                .Select(m => new OrderVM
+                {
+                    FirstName = m.c.FirstName,
+                    LastName = m.c.LastName,
+                    OrderRow = m.cust.ord.orderR.Id,
+                    Order = m.cust.ord.order.Id,
+                    Price = m.cust.ord.orderR.Price,
+                    Title = m.cust.a.Title
+                })
+                .ToList();
+
+            //return RedirectToRoute("CustomerData", new { email });
+            return View(Orders);
+        }
 
         public IActionResult ShowCart()
         {
