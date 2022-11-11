@@ -225,43 +225,6 @@ namespace Movie_Store.Controllers
                 _db.SaveChanges();
             }
 
-            //int counter2 = sessionObject.MovieIds.Count();
-            //for (int j = 0; j < counter2; j++)
-            //{
-            //    sessionObject.MovieIds.RemoveAt(0);
-            //}
-            //HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
-
-            return View("PurchaseDone");
-        }
-
-     
-        public IActionResult PurchaseDone()
-        {
-            CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
-
-            if (sessionObject == null)
-            {
-                return View();
-            }
-
-            var SCart = (from m in _db.Movies.ToList().OrderBy(x => x.Title)
-                         join s in sessionObject.MovieIds
-                         on m.Id equals s
-                         select new ShoppingVM()
-                         {
-                             Title = m.Title,
-                             Price = m.Price,
-                         });
-           return View(SCart);
-
-        }
-        public IActionResult Final()
-        {
-            CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
-
-
-
             int counter2 = sessionObject.MovieIds.Count();
             for (int j = 0; j < counter2; j++)
             {
@@ -269,8 +232,67 @@ namespace Movie_Store.Controllers
             }
             HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("PurchaseDone");
         }
+
+        
+        public IActionResult PurchaseDone()
+        {
+
+            var lastId = _db.Orders.OrderBy(x => x.Id).Last().Id;
+
+            var receipt = _db.Orders.Where(x => x.Id == lastId)
+                .Join(_db.OrderRows,
+                order => order.Id,
+                orderR => orderR.OrderId,
+                (order, orderR) => new { order, orderR })
+                .Join(_db.Movies,
+               ord => ord.orderR.MovieId,
+               m => m.Id,
+               (ord, m) => new ReceiptVM
+               {
+                   Price = m.Price,
+                   Title = m.Title
+               }).ToList();
+
+            return View(receipt);
+        }
+
+            
+
+           // CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+
+           // if (sessionObject == null)
+           // {
+           //     return View();
+           // }
+
+           // var SCart = (from m in _db.Movies.ToList().OrderBy(x => x.Title)
+           //              join s in sessionObject.MovieIds
+           //              on m.Id equals s
+           //              select new ShoppingVM()
+           //              {
+           //                  Title = m.Title,
+           //                  Price = m.Price,
+           //              });
+           //return View(SCart);
+
+        
+        //public IActionResult Final()
+        //{
+        //    CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+
+
+
+        //    int counter2 = sessionObject.MovieIds.Count();
+        //    for (int j = 0; j < counter2; j++)
+        //    {
+        //        sessionObject.MovieIds.RemoveAt(0);
+        //    }
+        //    HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
+
+        //    return RedirectToAction("Index", "Home");
+        //}
     
     }
 }
