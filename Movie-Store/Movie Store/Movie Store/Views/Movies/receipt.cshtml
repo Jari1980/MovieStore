@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Movie_Store.Models.ViewModells.ReceiptVM>
+
+@foreach (var item in Model)
+{
+
+    <span> Price = @item.Price </span>
+    <br />
+    <span> Title = @item.Title </span>
+
+}

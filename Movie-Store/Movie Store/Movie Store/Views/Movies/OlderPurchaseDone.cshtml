@@ -1,0 +1,197 @@
+﻿@model IEnumerable<Movie_Store.Models.ViewModells.ReceiptVM>
+
+<head>
+    <title>Purchase Completed</title>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <style type="text/css">
+        table > tbody > tr > td, table > tbody > tr > th,
+        table > tfoot > tr > td, table > tfoot > tr > th {
+            border: 0
+        }
+    </style>
+
+
+</head>
+<br />
+<br />
+<br />
+<header style="text-align:center; border: solid green 2px; padding:20px">
+
+    <h2>Thank you!</h2>
+    <br />
+    <h3>Your order has been placed.</h3>
+    <br />
+    <br />
+    <p>An email recepit including the details about your order has not been sent to the the email address provided.</p>
+
+
+</header>
+
+<br />
+
+@foreach(var item in Model){
+
+    <span> Price = @item.Price </span>
+    <br />
+    <span> Title = @item.Title </span>
+
+}
+
+
+
+@*<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-4">
+    <table class="table" border="0">
+        <thead>
+            <tr>
+                <th id="1">Title/Quantity Price</th>
+                
+               
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (Model != null)
+                {
+                    int i = 0;
+                    int copies = 1;
+                    List<string> shopList = new List<string>();
+                    @foreach (var item in Model)
+                    {
+                        shopList.Add(@item.Title);
+                    }
+
+
+                    @for (int j = 0; j < shopList.Count; j++)
+                    {
+                        if (j == 0)
+                        {
+                            if (shopList.Count > 1)
+                            {
+                                if (shopList[i] == shopList[i + 1])
+                                {
+                                    copies++;
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td id="1">
+                                            <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price * @copies)</span>
+                                        </td>
+                                       
+                                       
+                                    </tr>
+                                    copies = 1;
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td id="1">
+                                        <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price * @copies)</span>
+                                    </td>
+                                    
+                                   
+                                </tr>
+                                copies = 1;
+                            }
+                        }
+                        else if (j < shopList.Count - 1)
+                        {
+                            if (shopList[j] == shopList[j + 1])
+                            {
+                                copies++;
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td id="1">
+                                        <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price * @copies)</span>
+                                    </td>
+                                    
+                                </tr>
+                                copies = 1;
+                            }
+                        }
+                        else if (j == shopList.Count - 1)
+                        {
+                            <tr>
+                                <td id="1">
+                                    <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price * @copies)</span>
+                                </td>
+                               
+                            </tr>
+                            copies = 1;
+                        }
+                        else
+                        {
+                            <tr>
+                                <td id="1">
+                                    <span>@shopList[j], copies: @copies price: @(@Model.ElementAt(j).Price * @copies)</span>
+                                </td>
+                                
+                            </tr>
+                            copies = 1;
+                        }
+                    }
+
+                    double res = 0;
+                    @foreach (var item in Model)
+                    {
+                        res = Math.Round((@item.Price + res), 2);
+                    }
+
+                    <tr>
+                        <td>_________________________</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span><b>Total order sum: @res </b></span>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+            </div>
+
+            <div class="col-4">
+        <img src="https://ih1.redbubble.net/image.1302017755.2407/flat,750x,075,f-pad,750x1000,f8f8f8.jpg" width="200" height="200" />
+            </div>
+
+        </div>
+    </div>*@
+
+    @*<div style="display:inline-flex">
+    <a class="nav-link" asp-action="Final">Back to Home page</a>
+    </div>*@
+    
+   
+
+    @*<a href="Final">
+    <input type="button" value="Click Me" />
+    </a>*@
+   
+
+    @*<div style="display:inline-flex;">
+        <ul class="list-group">
+  <li class="list-group-item">
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Back To Home Page</a>
+  </li>
+  </ul>
+    </div>*@
+
+
+@*</body>*@
+
+
+
+
+
+
