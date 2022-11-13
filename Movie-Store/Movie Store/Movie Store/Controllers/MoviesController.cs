@@ -149,7 +149,8 @@ namespace Movie_Store.Controllers
         [HttpPost]
         public IActionResult CustomerData(int Id)
         {
-            string email = _db.Customers.Where(y => y.Id == Id).FirstOrDefault().EmailAdress;
+            string email = _db.Customers.Where(y => y.Id == Id).FirstOrDefault().EmailAdress.ToString();
+            //string email = _db.Customers.Where(y => y.Id == Id).FirstOrDefault().EmailAdress.ToString();
 
             var Orders = _db.Orders.Where(x => x.CustomerId == Id)
                 .Join(_db.OrderRows,
@@ -162,7 +163,7 @@ namespace Movie_Store.Controllers
                 cust =>cust.ord.order.CustomerId, c => c.Id, (cust, c) => new {cust, c})
                 .Select(m => new OrderVM
                 {
-                    eMail = email,
+                    eMail = m.c.EmailAdress,
                     FirstName = m.c.FirstName,
                     LastName = m.c.LastName,
                     OrderRow = m.cust.ord.orderR.Id,
