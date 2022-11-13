@@ -5,6 +5,7 @@
         //public List<int> Orders { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string eMail { get; set; }
         public int Order { get; set; }
         public int OrderRow { get; set; }
         public double Price { get; set; }

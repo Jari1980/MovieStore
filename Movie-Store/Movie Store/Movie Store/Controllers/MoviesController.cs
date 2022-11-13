@@ -162,6 +162,7 @@ namespace Movie_Store.Controllers
                 cust =>cust.ord.order.CustomerId, c => c.Id, (cust, c) => new {cust, c})
                 .Select(m => new OrderVM
                 {
+                    eMail = email,
                     FirstName = m.c.FirstName,
                     LastName = m.c.LastName,
                     OrderRow = m.cust.ord.orderR.Id,
@@ -254,13 +255,19 @@ namespace Movie_Store.Controllers
                 _db.OrderRows.AddRange(
                     new OrderRows
                     {
+                        Order = ord,
                         OrderId = _db.Orders.Max(o => o.Id),
                         MovieId = sessionObject.MovieIds[i],
                         Price = (_db.Movies.FirstOrDefault(m => m.Id == sessionObject.MovieIds[i])).Price
                     }
                     );
+                var Test = _db.OrderRows.TakeLast(1); 
                 _db.SaveChanges();
+                //_db.OrderRows.UpdateRange();
+                _db.UpdateRange();
+
             }
+            //_db.SaveChanges();
 
             int counter2 = sessionObject.MovieIds.Count();
             for (int j = 0; j < counter2; j++)
