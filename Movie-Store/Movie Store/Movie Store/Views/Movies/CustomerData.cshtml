@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<Movie_Store.Models.ViewModells.OrderVM>
 
+
+    @foreach(var item in Model) { 
 <script>
-window.location.hash = "@Model.ElementAt(0).eMail";
+    window.location.hash = "@item.eMail";
 </script>
+    }
 @{
     ViewData["Title"] = "CustomerData";
 }
@@ -10,9 +13,16 @@ window.location.hash = "@Model.ElementAt(0).eMail";
 
 
 <h1>CustomerData</h1>
-
-<td><h2>@Model.ElementAt(0).FirstName @Model.ElementAt(0).LastName </h2><br /><br /></td>
-
+@{
+    int i = 0;
+    @foreach(var item in Model){
+        if (i < 1)
+        {
+            <td><h2>@item.FirstName @item.LastName </h2><br /><br /></td>
+            i++;
+        }
+}
+}
 @{
     int counter = Model.Count();
     double totalExp = 0;
