@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<Movie_Store.Models.ViewModells.OrderVM>
 
+<script>
+window.location.hash = "@Model.ElementAt(0).eMail";
+</script>
 @{
     ViewData["Title"] = "CustomerData";
 }
