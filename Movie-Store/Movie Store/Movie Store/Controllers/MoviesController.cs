@@ -149,6 +149,7 @@ namespace Movie_Store.Controllers
         [HttpPost]
         public IActionResult CustomerData(int Id)
         {
+
             string email = _db.Customers.Where(y => y.Id == Id).FirstOrDefault().EmailAdress.ToString();
             //string email = _db.Customers.Where(y => y.Id == Id).FirstOrDefault().EmailAdress.ToString();
 
