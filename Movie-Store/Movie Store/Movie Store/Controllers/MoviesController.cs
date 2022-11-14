@@ -241,14 +241,14 @@ namespace Movie_Store.Controllers
                 Customer = cust,
             };
 
-            _db.Orders.AddRange(
-                new Orders
-                {
-                    OrderDate = DateTime.Now,
-                    CustomerId = cust.Id,
-                    Customer = cust,
-                }
-                );
+            //_db.Orders.AddRange(
+            //    new Orders
+            //    {
+            //        OrderDate = DateTime.Now,
+            //        CustomerId = cust.Id,
+            //        Customer = cust,
+            //    }
+            //    );
 
 
             int counter = sessionObject.MovieIds.Count();
