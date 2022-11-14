@@ -1,16 +1,22 @@
 ﻿@model IEnumerable<Movie_Store.Models.ViewModells.OrderVM>
 
+<form asp-action="CustomerData">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Search data for new customer</label>
+    <input type="number" class="form-control" id="Id" name="Id" aria-describedby="Customer Id" placeholder="Enter customer Id">
+  </div>
+</form>
+<br />
+<br />
 
-    @foreach(var item in Model) { 
-<script>
-    window.location.hash = "@item.eMail";
-</script>
+@foreach(var item in Model) {
+    <script>
+            window.location.hash = "@item.eMail";
+    </script>
     }
 @{
     ViewData["Title"] = "CustomerData";
 }
-
-
 
 <h1>CustomerData</h1>
 @{
@@ -18,7 +24,7 @@
     @foreach(var item in Model){
         if (i < 1)
         {
-            <td><h2>@item.FirstName @item.LastName </h2><br /><br /></td>
+    <td><h2>@item.FirstName @item.LastName </h2><br /><br /></td>
             i++;
         }
 }
