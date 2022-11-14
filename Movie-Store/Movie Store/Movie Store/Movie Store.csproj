@@ -24,4 +24,13 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Content\" />
+    <Folder Include="Views\Shared\Pics\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\img\Broccoli.png" />
+  </ItemGroup>
+
 </Project>
