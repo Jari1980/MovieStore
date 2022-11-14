@@ -97,8 +97,12 @@ namespace Movie_Store.Controllers
         public IActionResult RemoveFromCart(int Id)
         {
             CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
-            sessionObject.MovieIds.Remove(Id);
-            HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
+
+            if (sessionObject != null)
+            {
+                sessionObject.MovieIds.Remove(Id);
+                HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
+            }
             return RedirectToAction("ShoppingView");
         }
 
