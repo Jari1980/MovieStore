@@ -308,7 +308,15 @@ namespace Movie_Store.Controllers
             return View(receipt);
         }
 
-            
+            public IActionResult TopMovies()
+            {
+            var topmovies = _db.Movies.OrderByDescending(m => m.ReleaseYear);
+
+
+
+
+             return View(topmovies); 
+            }
 
            // CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
 
