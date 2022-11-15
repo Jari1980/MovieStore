@@ -274,7 +274,8 @@ namespace Movie_Store.Controllers
 
             }
             //_db.SaveChanges();
-
+            TempData["ePost"] = email;
+            TempData["movCount"] = counter;
             int counter2 = sessionObject.MovieIds.Count();
             for (int j = 0; j < counter2; j++)
             {
@@ -288,70 +289,86 @@ namespace Movie_Store.Controllers
         
         public IActionResult PurchaseDone()
         {
+            //if (TempData["ePost"] == null) { 
 
-            var lastId = _db.Orders.OrderBy(x => x.Id).Last().Id;
-
-            var receipt = _db.Orders.Where(x => x.Id == lastId)
+            int movieCount = (int)TempData["movCount"];
+            
+            var receipt = _db.Customers.OrderByDescending(x => x.Id).Where(x => x.EmailAdress == TempData["ePost"].ToString())
+                .Join(_db.Orders,
+                customer => customer.Id,
+                order => order.CustomerId,
+                (customer, order) => new { customer, order })
                 .Join(_db.OrderRows,
-                order => order.Id,
+                cust => cust.order.Id,
                 orderR => orderR.OrderId,
-                (order, orderR) => new { order, orderR })
+                (cust, orderR) => new { cust, orderR })
                 .Join(_db.Movies,
-               ord => ord.orderR.MovieId,
-               m => m.Id,
-               (ord, m) => new ReceiptVM
-               {
-                   Price = m.Price,
-                   Title = m.Title
-               }).ToList();
-
-            return View(receipt);
+                ord => ord.orderR.MovieId,
+                mov => mov.Id,
+                (ord, mov) => new ReceiptVM
+                {
+                    Price = mov.Price,
+                    Title = mov.Title
+                }).ToList().Take(movieCount);
+                return View(receipt);
         }
 
-            public IActionResult TopMovies()
-            {
-            var topmovies = _db.Movies.OrderByDescending(m => m.ReleaseYear);
 
+            //var lastId = _db.Orders.OrderBy(x => x.Id).Last().Id;
 
+            //var receipt = _db.Orders.Where(x => x.Id == lastId)
+            // .Join(_db.OrderRows,
+            // order => order.Id,
+            // orderR => orderR.OrderId,
+            // (order, orderR) => new { order, orderR })
+            // .Join(_db.Movies,
+            //ord => ord.orderR.MovieId,
+            //m => m.Id,
+            //(ord, m) => new ReceiptVM
+            //{
+            //    Price = m.Price,
+            //    Title = m.Title
+            //}).ToList();
 
-
-             return View(topmovies); 
-            }
-
-           // CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
-
-           // if (sessionObject == null)
-           // {
-           //     return View();
-           // }
-
-           // var SCart = (from m in _db.Movies.ToList().OrderBy(x => x.Title)
-           //              join s in sessionObject.MovieIds
-           //              on m.Id equals s
-           //              select new ShoppingVM()
-           //              {
-           //                  Title = m.Title,
-           //                  Price = m.Price,
-           //              });
-           //return View(SCart);
-
-        
-        //public IActionResult Final()
-        //{
-        //    CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
-
-
-
-        //    int counter2 = sessionObject.MovieIds.Count();
-        //    for (int j = 0; j < counter2; j++)
-        //    {
-        //        sessionObject.MovieIds.RemoveAt(0);
-        //    }
-        //    HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
-
-        //    return RedirectToAction("Index", "Home");
-        //}
+          
     
-    }
+
+
+
+    // CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+
+    // if (sessionObject == null)
+    // {
+    //     return View();
+    // }
+
+    // var SCart = (from m in _db.Movies.ToList().OrderBy(x => x.Title)
+    //              join s in sessionObject.MovieIds
+    //              on m.Id equals s
+    //              select new ShoppingVM()
+    //              {
+    //                  Title = m.Title,
+    //                  Price = m.Price,
+    //              });
+    //return View(SCart);
+
+
+    //public IActionResult Final()
+    //{
+    //    CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+
+
+
+    //    int counter2 = sessionObject.MovieIds.Count();
+    //    for (int j = 0; j < counter2; j++)
+    //    {
+    //        sessionObject.MovieIds.RemoveAt(0);
+    //    }
+    //    HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
+
+    //    return RedirectToAction("Index", "Home");
+    //}
+
+}
 }
 
