@@ -10,6 +10,7 @@ namespace Movie_Store.Models
         public string Director { get; set; }
         public int ReleaseYear { get; set; }
         public double Price { get; set; }
+        public string MovieImg { get; set; }
 
     }
 }
