@@ -257,22 +257,24 @@ namespace Movie_Store.Controllers
 
 
             int counter = sessionObject.MovieIds.Count();
+            var orderRows = new List<OrderRows>();
             for (int i = 0; i < counter; i++) {
-                _db.OrderRows.AddRange(
-                    new OrderRows
-                    {
-                        Order = ord,
-                        OrderId = _db.Orders.Max(o => o.Id),
-                        MovieId = sessionObject.MovieIds[i],
-                        Price = (_db.Movies.FirstOrDefault(m => m.Id == sessionObject.MovieIds[i])).Price
-                    }
-                    );
-                var Test = _db.OrderRows.TakeLast(1); 
-                _db.SaveChanges();
+                //ord.OrderRows.Add(_db.OrderRows. Max(o => o.Id);
+                //var Test = _db.OrderRows.TakeLast(1);
+                //ord.OrderRows.Add(Test);
                 //_db.OrderRows.UpdateRange();
-                _db.UpdateRange();
-
+                //_db.UpdateRange();
+                orderRows.Add(new OrderRows
+                {
+                    Order = ord,
+                    MovieId = sessionObject.MovieIds[i],
+                    Price = (_db.Movies.FirstOrDefault(m => m.Id == sessionObject.MovieIds[i])).Price
+                });
             }
+            _db.OrderRows.AddRange(orderRows);
+            _db.SaveChanges();
+
+
             //_db.SaveChanges();
             TempData["ePost"] = email;
             TempData["movCount"] = counter;
