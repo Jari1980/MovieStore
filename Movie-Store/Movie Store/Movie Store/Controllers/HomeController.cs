@@ -33,7 +33,7 @@ namespace Movie_Store.Controllers
                 {
                     //var id = m.Key
                     Title = _db.Movies.Where(m => m.Id == p.Key).FirstOrDefault().Title,
-                    test = _db.Movies.Where(m => m.Id == p.Key).FirstOrDefault().Title,           //Find().Director, //Change this!
+                    test = _db.Movies.Where(m => m.Id == p.Key).FirstOrDefault().MovieImg,         
                     BuyCount = p.Count()
                 })
                 .OrderByDescending(c => c.BuyCount)
@@ -43,7 +43,7 @@ namespace Movie_Store.Controllers
                 .Select(m => new FiveNewestVM()
                 {
                     Title = m.Title,
-                    Img = m.Director     //Change this!
+                    Img = m.MovieImg     
                 })
                 .Take(5)
                 .ToList();
@@ -51,7 +51,7 @@ namespace Movie_Store.Controllers
                 .Select(m => new FiveOldestVM()
                 {
                     Title = m.Title,
-                    Img = m.Director   //Change this!
+                    Img = m.MovieImg
                 })
                 .Take(5)
                 .ToList();
@@ -59,7 +59,7 @@ namespace Movie_Store.Controllers
                 .Select(m => new FiveCheapestVM()
                 {
                     Title = m.Title,
-                    Img = m.Director    //Change this!
+                    Img = m.MovieImg
                 })
                 .Take(5)
                 .ToList();
