@@ -12,48 +12,82 @@
 </div>
 
 
-<div>
-    @foreach(var item in Model.MostPopular)
-    {
-        <span>@item.Title</span>
-        <span>@item.test</span>
-        <span>Testing first list ||</span>
-    }
+ <div>
+        <h2>Our Five Most Popular Movies</h2>
+        <div class="card-group">
+        @foreach (var item in @Model.MostPopular){
 
-</div>
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <img src="@item.test" style="height: 350px" class="card-img-top" alt="...">
+                            <div class="card-body">
+                <p class="card-text">@item.Title</p>
+                </div>
+             </div>
+            </div>
+}
+        <div/>
+    <div/>
 <br />
-<div>
-    @foreach(var item in Model.FiveNewest)
+
+    <div>
+        <h2>Our Five Latest Möövies</h2>
+        <div class="card-group">
+        @foreach (var item in @Model.FiveNewest){
+
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <img src="@item.Img" style="height: 350px" class="card-img-top" alt="...">
+                            <div class="card-body">
+                <p class="card-text">@item.Title</p>
+                </div>
+             </div>
+            </div>
+}
+        <div/>
+    <div/>
+    
+    <br />
+    <div>
+        <h2>Our Five Oldest Movies</h2>
+        <div class="card-group">
+        @foreach (var item in @Model.FiveOldest){
+
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <img src="@item.Img" style="height: 350px" class="card-img-top" alt="...">
+                            <div class="card-body">
+                <p class="card-text">@item.Title</p>
+                </div>
+             </div>
+            </div>
+}
+        <div/>
+    <div/>
+    <br />
+   <div>
+        <h2>Our Five Cheapest Movies</h2>
+        <div class="card-group">
+        @foreach (var item in @Model.FiveCheapest){
+
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <img src="@item.Img" style="height: 350px" class="card-img-top" alt="...">
+                            <div class="card-body">
+                <p class="card-text">@item.Title</p>
+                </div>
+             </div>
+            </div>
+}
+        <div/>
+    <div/>
+    <br />
+    <br />
+    <div class="col-sm-3">
+        <h2>Special Customer</h2>
+        @foreach(var item in Model.CustomerExp)
     {
-        <span>@item.Title</span>
-        <span>@item.Img</span>
-        <span>Testing second list ||</span>
+            <span>@item.FirstName @item.LastName placed largest order with total sum of: @item.Sum Sek</span>
     }
-</div>
-<br />
-<div>
-    @foreach(var item in Model.FiveOldest)
-    {
-        <span>@item.Title</span>
-        <span>@item.Img</span>
-        <span>Testing third list ||</span>
-    }
-</div>
-<br />
-<div>
-    @foreach(var item in Model.FiveCheapest)
-    {
-        <span>@item.Title</span>
-        <span>@item.Img</span>
-        <span>Testing fourth list ||</span>
-    }
-</div>
-<br />
-<div>
-    @foreach(var item in Model.CustomerExp)
-    {
-        <span>@item.FirstName @item.LastName placed largest order on: @item.Sum</span>
-        <span>Testing last||</span>
-    }
-</div>
+    </div>
 
