@@ -22,20 +22,36 @@
 
 <body>
     @{
-<div class="card-group">
-    @foreach (var item in @Model){
+                    <div class="card-group">
+                        @foreach (var item in @Model){
 
-                <div class="col-sm-3">
-                    <div class="card">
-                        <img src="@item.MovieImg" style="height: 350px" class="card-img-top" alt="...">
-                        <div class="card-body">
-            <p class="card-text">@Html.Partial("_moviePartial", item)</p>
-            <a asp-action="Buy" asp-route-Id="@item.Id">Add movie to cart</a>
-            </div>
-         </div>
-        </div>
+                                    <div class="col-sm-3">
+                                        <div class="card">
+                                            <img src="@item.MovieImg" style="height: 350px" class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                <p class="card-text">@Html.Partial("_moviePartial", item)</p>
+                                @*<a asp-action="Buy" asp-route-Id="@item.Id">Add movie to cart</a>*@
+                                <button class="btn btn-primary" onclick="addToCart(@item.Id)">Add to cart</button>
+                                </div>
+                             </div>
+                            </div>
 }
-</div>
+                    </div>
 }
 </body>
 
+<script>
+function addToCart(movieId) {
+    $.ajax({
+        type: "post",
+        url: "/movies/addtocart",
+        dataType: "json",
+        cache: false,
+        data: {id: movieId},
+        success: function(data) {
+            $('shopCount').html(data.value);
+        }
+    })
+}
+
+</script>

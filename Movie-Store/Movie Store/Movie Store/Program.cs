@@ -25,6 +25,7 @@ builder.Services.AddSession(options =>
 });
 
 builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddSingleton<HttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 

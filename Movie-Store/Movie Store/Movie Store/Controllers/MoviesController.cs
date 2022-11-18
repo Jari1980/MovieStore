@@ -106,8 +106,8 @@ namespace Movie_Store.Controllers
             return RedirectToAction("ShoppingView");
         }
 
-       // [HttpPost]
-        public IActionResult AddCopy(string Title)
+        // [HttpPost]
+        public IActionResult AddCopyFromCart(string Title)
         {
             //Title = Title.Trim();
             var test = Title;
@@ -119,10 +119,28 @@ namespace Movie_Store.Controllers
             HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
 
             return RedirectToAction("ShowCart");
+            
+
+        }
+        public IActionResult AddCopy(string Title)
+        {
+            //Title = Title.Trim();
+            var test = Title;
+
+            int Id = _db.Movies.Where(x => x.Title == Title).Select(x => x.Id).First();
+
+            CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+            sessionObject.MovieIds.Add(Id);
+            HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
+
+            //return RedirectToAction("ShowCart");
+            var count = sessionObject.MovieIds.Count();
+            return Json(new { Value = count });
+
         }
 
         // [HttpPost]
-        public IActionResult RemoveCopy(string Title)
+        public IActionResult RemoveCopyFromCart(string Title)
         {
             var test = Title;
 
@@ -133,6 +151,20 @@ namespace Movie_Store.Controllers
             HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
 
             return RedirectToAction("ShowCart");
+        }
+        public IActionResult RemoveCopy(string Title)
+        {
+            var test = Title;
+
+            int Id = _db.Movies.Where(x => x.Title == Title).Select(x => x.Id).First();
+
+            CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
+            sessionObject.MovieIds.Remove(Id);
+            HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
+
+            //return RedirectToAction("ShowCart");
+            var count = sessionObject.MovieIds.Count();
+            return Json(new { Value = count });
         }
 
         public IActionResult Shopping()
@@ -161,11 +193,11 @@ namespace Movie_Store.Controllers
                 .Join(_db.OrderRows,
                 order => order.Id,
                 orderR => orderR.OrderId,
-                (order, orderR) => new {order, orderR})
+                (order, orderR) => new { order, orderR })
                 .Join(_db.Movies,
-                ord => ord.orderR.MovieId, a => a.Id, (ord, a) => new {ord, a})
+                ord => ord.orderR.MovieId, a => a.Id, (ord, a) => new { ord, a })
                 .Join(_db.Customers,
-                cust =>cust.ord.order.CustomerId, c => c.Id, (cust, c) => new {cust, c})
+                cust => cust.ord.order.CustomerId, c => c.Id, (cust, c) => new { cust, c })
                 .Select(m => new OrderVM
                 {
                     eMail = m.c.EmailAdress,
@@ -175,8 +207,20 @@ namespace Movie_Store.Controllers
                     Order = m.cust.ord.order.Id,
                     Price = m.cust.ord.orderR.Price,
                     Title = m.cust.a.Title
-                })
-                .ToList();
+                }).ToList();
+
+            //var OrderQuery = _db.Orders.Where(x => x.CustomerId == Id).Zip(_db.OrderRows).ToList();
+            //var NewOrderQuery = OrderQuery.Zip(_db.Movies, _db.Customers).Select(movie => new OrderVM
+            //{
+            //    eMail = movie.Third.EmailAdress,
+            //    FirstName = movie.Third.FirstName,
+            //    LastName = movie.Third.LastName,
+            //    OrderRow = movie.First.First.Id,
+            //    Order = movie.First.Second.Order.Id,
+            //    Price = movie.First.Second.Price,
+            //    Title = movie.Second.Title
+            //}).ToList();
+
 
             //return RedirectToRoute("CustomerData", new { email });
             return View(Orders);
