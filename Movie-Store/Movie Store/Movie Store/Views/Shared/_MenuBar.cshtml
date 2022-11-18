@@ -1,4 +1,21 @@
-﻿
+﻿@using Movie_Store.Helper;
+@using Movie_Store.Models.ViewModells;
+@inject IHttpContextAccessor _httpContext
+
+@{
+    const string SessionKeyCart = "ShoppingCart";
+    var count = 0;
+    var sessionObject = _httpContext.HttpContext.Session.Get<CartVM>(SessionKeyCart);
+    if (sessionObject == null)
+    {
+        count = 0;
+    }
+    else
+    {
+        count = sessionObject.MovieIds.Count;
+    }
+
+}
 
 
 <style>
@@ -46,12 +63,13 @@
                     <li class="nav-item">
                         <a class="nav-link text-grey" asp-area="" asp-controller="Movies" asp-action="ShowCart">Shopping Cart</a>
                     </li>
-
-                    <img src="~/css/img/shopping-cart.png" style="width:48px;/>
                     
-                </ul>
-                <partial name="_LoginPartial" />
-            </div>
-        </div>
-    </nav>
-</header>
+                    
+                    <img src="~/css/img/shopping-cart.png" style="width:48px;/>                                       
+                        </ul>
+                        <partial name="_LoginPartial" />
+                    <span>@count</span>
+                    </div>
+                </div>
+            </nav>
+        </header>
