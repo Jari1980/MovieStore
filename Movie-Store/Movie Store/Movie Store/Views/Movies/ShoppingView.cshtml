@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Movie_Store.Models.Movies>
 
+
+
 @{
     ViewData["Title"] = "ShoppingView";
 }
@@ -56,28 +58,30 @@
 <script>
 function addToCart(movieId) {
     $.ajax({
-        type: "post",
+        type: "POST",
         url: "/movies/addtocart",
         dataType: "json",
         cache: false,
-        data: {id: movieId},
+        data: { id: movieId },
         success: function(data) {
-            $('shopCount').html(data.value);
+            //document.getElementById("shopCount").value = data.value;
+            //$('#shopCount').html(data.value);
         }
-    })
+    });
 }
 
 function RemoveFromCart(movieId) {
     $.ajax({
-        type: "post",
+        type: "POST",
         url: "/movies/removefromcart",
         dataType: "json",
         cache: false,
-        data: {id: movieId},
+        data: { id: movieId },
         success: function(data) {
-            $('shopCount').html(data.value);
+            //document.getElementById("shopCount").value = data.value;
+            $('#shopCount').html(data.value);
         }
-    })
+    });
 }
 
 </script>

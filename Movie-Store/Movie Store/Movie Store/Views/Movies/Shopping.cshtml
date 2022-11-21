@@ -49,7 +49,7 @@ function addToCart(movieId) {
         cache: false,
         data: {id: movieId},
         success: function(data) {
-            $('shopCount').html(data.value);
+            $('#shopCount').html(data.value);
         }
     })
 }
