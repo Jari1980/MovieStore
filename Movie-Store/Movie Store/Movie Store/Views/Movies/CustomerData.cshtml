@@ -1,0 +1,124 @@
+﻿@model IEnumerable<Movie_Store.Models.ViewModells.OrderVM>
+<br />
+<br />
+<br />
+<form asp-action="CustomerData">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Search data for new customer</label>
+    <input type="number" class="form-control" id="Id" name="Id" aria-describedby="Customer Id" placeholder="Enter customer Id">
+  </div>
+</form>
+<br />
+<br />
+
+@foreach(var item in Model) {
+    <script>
+            window.location.hash = "@item.eMail";
+    </script>
+    }
+@{
+    ViewData["Title"] = "CustomerData";
+}
+
+<h1>CustomerData</h1>
+@{
+    int i = 0;
+    @foreach(var item in Model){
+        if (i < 1)
+        {
+    <td><h2>@item.FirstName @item.LastName </h2><br /><br /></td>
+            i++;
+        }
+}
+}
+@{
+    int counter = Model.Count();
+    double totalExp = 0;
+
+    foreach(var item in Model)
+    {
+        totalExp = totalExp + item.Price;
+    }
+
+
+    @foreach(var item in Model)
+    {
+    <span>Order Id:@item.Order</span>
+    <br />
+    <span>Order Row Id:@item.OrderRow</span>
+    <br />
+    <span>Movie Title: @item.Title</span>
+    <br />
+    <span>Price: @item.Price</span>
+    <br />
+    <span>___________</span>
+    <br />
+    }
+    <br />
+    <span>Total count of orders: @counter</span>
+    <br />
+    <span>Sum for all purchases: @totalExp</span>
+
+}
+
+
+
+@*
+<div>
+    <h4>Customers</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BillingAdress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BillingAdress)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.BillingZip)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.BillingZip)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DeliveryAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DeliveryAddress)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DeliveryZip)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DeliveryZip)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EmailAdress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EmailAdress)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNo)
+        </dd>
+    </dl>
+</div>*@
+@*<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>*@

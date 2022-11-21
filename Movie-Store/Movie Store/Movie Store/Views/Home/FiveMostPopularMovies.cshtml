@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Movie_Store.Models.ViewModells.FiveMostPopularMoviesVM>
+
+
+Model.ElementAt(0).Title;
+@{
+    
+}
+<h2>Mest populära filmerna, Testar</h2>
+
+
+
+    @foreach(var item in @Model)
+{
+    <span>@item.Title</span>
+    <span>@item.test</span>
+}
+
+<partial name="_FiveMostPopularMovies" model="Model" />

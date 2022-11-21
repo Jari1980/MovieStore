@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Movie_Store.Models.Movies>
+
+
+
+@{
+    ViewData["Title"] = "ShoppingView";
+}
+
+
+<body>
+<h1>ShopingView</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Director)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReleaseYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Director)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @*<a asp-action="AddToCart" asp-route-id="@item.Id">Add movie to cart</a> 
+                <a asp-action="RemoveFromCart" asp-route-id="@item.Id">Remove movie from cart</a>*@
+                <button class="btn btn-primary" onclick="addToCart(@item.Id)">Add to cart</button>
+                <button class="btn btn-primary" onclick="RemoveFromCart(@item.Id)">Remove from cart</button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+<script>
+function addToCart(movieId) {
+    $.ajax({
+        type: "POST",
+        url: "/movies/addtocart",
+        dataType: "json",
+        cache: false,
+        data: { id: movieId },
+        success: function(data) {
+            //document.getElementById("shopCount").value = data.value;
+            $('#shopCount').html(data.value);
+        }
+    });
+}
+
+function RemoveFromCart(movieId) {
+    $.ajax({
+        type: "POST",
+        url: "/movies/removefromcart",
+        dataType: "json",
+        cache: false,
+        data: { id: movieId },
+        success: function(data) {
+            //document.getElementById("shopCount").value = data.value;
+            $('#shopCount').html(data.value);
+        }
+    });
+}
+
+</script>

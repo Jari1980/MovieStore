@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Movie_Store.Data;
+using Movie_Store.Models;
+using Movie_Store.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +16,33 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddSingleton<HttpContextAccessor, HttpContextAccessor>();
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+
+    CustomersSeed.Initialize(services);
+
+    SeedMovieData.Initialize(services);
+
+    SeedOrders.Initialize(services);
+
+    SeedOrderRows.Initialize(services);
+
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -32,7 +60,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -40,5 +68,9 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+//app.MapControllerRoute(
+//    name: "Extra",
+//    pattern: "{controller=Movies}/{action=CustomerData}/{Model.email}");
 
 app.Run();

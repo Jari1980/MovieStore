@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Movie_Store.Models.ViewModells.ReceiptVM>
+
+
+@{
+    ViewData["Title"] = "Purchase Completed";
+}
+
+
+
+<header style="text-align:center; border: solid green 2px; padding:20px">
+
+    <h2>Thank you!</h2>
+    <br />
+    <h3>Your order has been placed.</h3>
+    <br />
+    <br />
+    <p>An email recepit including the details about your order has not been sent to the the email address provided.</p>
+
+
+</header>
+
+<br />
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-4">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    @* <td>
+                <a asp-action="Edit" asp-route-id="@item.">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @{
+
+        double total = 0;
+        foreach (var item in Model)
+        {
+            total = total + item.Price;
+
+        }
+        <span>Total Price = @total </span>
+
+    }
+        </div>
+    
+
+    <div class="col-4">
+        <img src="https://ih1.redbubble.net/image.1302017755.2407/flat,750x,075,f-pad,750x1000,f8f8f8.jpg" width="200" height="200" />
+    </div>
+        
+</div>
+</div>
