@@ -304,7 +304,7 @@ namespace Movie_Store.Controllers
             //    }
             //    );
 
-
+            //Test
             int counter = sessionObject.MovieIds.Count();
             var orderRows = new List<OrderRows>();
             for (int i = 0; i < counter; i++) {
