@@ -13,8 +13,8 @@
 
 
  <div>
-        <h2>Our Five Most Popular Movies</h2>
-        <div class="card-group">
+        <h2 style="text-align:center">Our Five Most Popular Movies</h2>
+    <div class="card-group justify-content-center">
         @foreach (var item in @Model.MostPopular){
 
                     <div class="col-sm-2">
@@ -31,11 +31,11 @@
 <br />
 
     <div>
-        <h2>Our Five Latest Movies</h2>
-        <div class="card-group">
+            <h2 style="text-align:center">Our Five Latest Movies</h2>
+            <div class="card-group justify-content-center">
         @foreach (var item in @Model.FiveNewest){
 
-                    <div class="col-sm-2">
+                    <div class="col-sm-2" style="align-items:center">
                         <div class="card">
                             <img src="@item.Img" style="height: 250px" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -49,8 +49,8 @@
     
     <br />
     <div>
-        <h2>Our Five Oldest Movies</h2>
-        <div class="card-group">
+                    <h2 style="text-align:center">Our Five Oldest Movies</h2>
+                    <div class="card-group card-group justify-content-center">
         @foreach (var item in @Model.FiveOldest){
 
                     <div class="col-sm-2">
@@ -66,8 +66,8 @@
     <div/>
     <br />
    <div>
-        <h2>Our Five Cheapest Movies</h2>
-        <div class="card-group">
+                            <h2 style="text-align:center">Our Five Cheapest Movies</h2>
+                            <div class="card-group card-group justify-content-center">
         @foreach (var item in @Model.FiveCheapest){
 
                     <div class="col-sm-2">
@@ -84,7 +84,7 @@
     <br />
     <br />
     <div class="col-sm-12">
-        <h2>Special Customer</h2>
+                                    <h2 style="text-align:center">Special Customer</h2>
         @foreach(var item in Model.CustomerExp)
     {
             <span>@item.FirstName @item.LastName placed largest order with total sum of: @item.Sum Sek</span>
