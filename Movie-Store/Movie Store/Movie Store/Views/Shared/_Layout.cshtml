@@ -17,8 +17,8 @@
 
 <body>
 
-   
-        @Html.Partial("_MenuBar") 
+ 
+        @Html.Partial("_MenuBar")
         <div class="row visible-sm" style="height:100px;"></div>
 
     
@@ -31,9 +31,10 @@
         </main>
     </div>
 
+    <div class="row visible-sm" style="height:100px;"></div>
     <footer class="border-top footer text-muted fixed-bottom">
         <div class="container">
-            &copy; 2022 - MovieStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; @DateTime.Now.Year - MovieStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
