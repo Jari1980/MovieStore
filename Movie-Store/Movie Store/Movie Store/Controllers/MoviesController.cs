@@ -91,7 +91,9 @@ namespace Movie_Store.Controllers
             CartVM sessionObject = HttpContext.Session.Get<CartVM>(SessionKeyCart);
             sessionObject.MovieIds.Add(Id);
             HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
-            return RedirectToAction("ShoppingView");
+            var count = sessionObject.MovieIds.Count();
+            return Json(new { Value = count });
+            //return RedirectToAction("ShoppingView");
         }
 
         public IActionResult RemoveFromCart(int Id)
@@ -102,8 +104,11 @@ namespace Movie_Store.Controllers
             {
                 sessionObject.MovieIds.Remove(Id);
                 HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
+
             }
-            return RedirectToAction("ShoppingView");
+            var count = sessionObject.MovieIds.Count();
+            return Json(new { Value = count });
+            //return RedirectToAction("ShoppingView");
         }
 
         // [HttpPost]
@@ -133,9 +138,9 @@ namespace Movie_Store.Controllers
             sessionObject.MovieIds.Add(Id);
             HttpContext.Session.Set<CartVM>(SessionKeyCart, sessionObject);
 
-            //return RedirectToAction("ShowCart");
-            var count = sessionObject.MovieIds.Count();
-            return Json(new { Value = count });
+            return RedirectToAction("ShowCart");
+            //var count = sessionObject.MovieIds.Count();
+            //return Json(new { Value = count });
 
         }
 
