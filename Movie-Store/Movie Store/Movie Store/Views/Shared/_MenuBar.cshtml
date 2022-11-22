@@ -19,22 +19,21 @@
 
 
 <style>
-.navbar-brand{
+    .navbar-brand {
         font-size: 40px;
-
-}
+    }
 </style>
 
 
 
 <header>
 
- 
+
     <nav class="navbar navbar-expand-lg navbar-toggleable-sm navbar-dark fixed-top bg-dark border-bottom box-shadow mb-3">
         <div class="container-fluid">
-            <img src="~/css/img/logo.png" style="width:48px;   />
-           
-            <a class="navbar-brand"     asp-area="" asp-controller="Home" asp-action="Index">Broccoli MovieStore</a>
+            <img src="~/css/img/logo.png" style="width:48px;    />
+
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Broccoli MovieStore</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -42,17 +41,17 @@
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav  mx-auto">
 
-                   
+
                     <li class="nav-item">
                         <a class="nav-link text-grey " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
-                   
+
                     <li class="nav-item">
                         <a class="nav-link text-grey" asp-area="" asp-controller="Movies" asp-action="Index">Add Movies</a>
                     </li>
-                    
+
                     <li class="nav-item">
-                    <a class="nav-link text-grey" asp-area="" asp-controller="Movies" asp-action="Orders">Orders</a>
+                        <a class="nav-link text-grey" asp-area="" asp-controller="Movies" asp-action="Orders">Orders</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-grey" asp-area="" asp-controller="Movies" asp-action="ShoppingView">Shopping List</a>
@@ -63,14 +62,14 @@
                     <li class="nav-item">
                         <a class="nav-link text-grey" asp-area="" asp-controller="Movies" asp-action="ShowCart">Shopping Cart</a>
                     </li>
-                    
-                    <img src="~/css/img/shopping-cart.png" style="width:48px;/>                                       
-                        </ul>
-                        <partial name="_LoginPartial" />
-                    <div class="shopCount">
-                    <span>@count</span>
-                </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
+
+                    <img src="~/css/img/shopping-cart.png" style="width:48px; />
+                </ul>
+                <partial name="_LoginPartial" />
+
+                <span id="shopCount">@count</span>
+
+            </div>
+        </div>
+    </nav>
+</header>
